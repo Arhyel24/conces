@@ -403,7 +403,7 @@ const RegistrationPage = () => {
                   onChange={handleChange}
                   onFocus={() => setFocusedField("department")}
                   onBlur={() => setFocusedField(null)}
-                  className={`w-full px-4 py-4 border-b-2 bg-transparent focus:outline-none transition-all duration-300 ${
+                  className={`w-full px-4 py-4 border-b-2 bg-transparent focus:outline-none transition-all duration-300 text-red-500 ${
                     errors.department
                       ? "border-red-500"
                       : focusedField === "department"
@@ -411,9 +411,11 @@ const RegistrationPage = () => {
                       : "border-slate-400"
                   } text-white`}
                 >
-                  <option value="">Select your department</option>
+                  <option value="" className="bg-slate-500">
+                    Select your department
+                  </option>
                   {ENGINEERING_DEPARTMENTS.map((dept) => (
-                    <option key={dept} value={dept}>
+                    <option key={dept} value={dept} className="bg-slate-500">
                       {dept}
                     </option>
                   ))}
@@ -485,9 +487,11 @@ const RegistrationPage = () => {
                       : "border-slate-400"
                   } text-white`}
                 >
-                  <option value="">Select your state</option>
+                  <option value="" className="bg-slate-500">
+                    Select your state
+                  </option>
                   {NIGERIAN_STATES.map((state) => (
-                    <option key={state} value={state}>
+                    <option key={state} value={state} className="bg-slate-500">
                       {state}
                     </option>
                   ))}

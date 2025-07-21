@@ -101,15 +101,33 @@ const AdminDashboard = () => {
     }
   };
 
-  const exportData = () => {
-    const dataStr = JSON.stringify(members, null, 2);
-    const dataUri =
-      "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
-    const exportFileDefaultName = "CONCES_members.json";
-    const linkElement = document.createElement("a");
-    linkElement.setAttribute("href", dataUri);
-    linkElement.setAttribute("download", exportFileDefaultName);
-    linkElement.click();
+  const exportData = async () => {
+    try {
+      const res = await fetch("/api/members/export");
+
+      if (!res.ok) throw new Error("Download failed");
+
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const today = new Date();
+      const dateStr = today.toISOString().split("T")[0];
+      const filename = `concess members list - ${dateStr}.xlsx`;
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.style.display = "none";
+
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error("Download failed:", err);
+      alert("Failed to download members.");
+    }
   };
 
   const handleLogout = () => {
@@ -246,9 +264,11 @@ const AdminDashboard = () => {
                 }
                 className="px-4 py-3 border-b-2 border-slate-400 bg-transparent focus:outline-none focus:border-yellow-400 transition-all duration-300 text-white"
               >
-                <option value="">All Departments</option>
+                <option value="" className="bg-slate-500">
+                  All Departments
+                </option>
                 {departments.map((dept) => (
-                  <option key={dept} value={dept}>
+                  <option key={dept} value={dept} className="bg-slate-500">
                     {dept}
                   </option>
                 ))}
@@ -259,9 +279,11 @@ const AdminDashboard = () => {
                 onChange={(e) => handleFilterChange("state", e.target.value)}
                 className="px-4 py-3 border-b-2 border-slate-400 bg-transparent focus:outline-none focus:border-yellow-400 transition-all duration-300 text-white"
               >
-                <option value="">All States</option>
+                <option value="" className="bg-slate-500">
+                  All States
+                </option>
                 {states.map((state) => (
-                  <option key={state} value={state}>
+                  <option key={state} value={state} className="bg-slate-500">
                     {state}
                   </option>
                 ))}

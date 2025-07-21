@@ -469,10 +469,10 @@ const LandingPage = () => {
             >
               <p className="text-slate-400 mb-4">Administrative Access</p>
               <motion.button
-                onClick={() => onNavigate("admin")}
+                onClick={() => router.replace("/admin/login")}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center space-x-2 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white px-6 py-3 transition-all duration-300 mx-auto"
+                className="flex items-center space-x-2 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white px-6 py-3 transition-all duration-300 mx-auto cursor-pointer"
               >
                 <Shield className="h-4 w-4" />
                 <span>Admin Login</span>

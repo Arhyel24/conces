@@ -177,9 +177,11 @@ const MembersPage = () => {
               onChange={(e) => handleDepartmentFilter(e.target.value)}
               className="w-full px-4 py-3 border-b-2 border-slate-400 bg-transparent focus:outline-none focus:border-yellow-400 transition-all duration-300 text-white"
             >
-              <option value="">All Departments</option>
+              <option value="" className="bg-slate-500">
+                All Departments
+              </option>
               {departments.map((dept) => (
-                <option key={dept} value={dept}>
+                <option key={dept} value={dept} className="bg-slate-500">
                   {dept}
                 </option>
               ))}

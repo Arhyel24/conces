@@ -1,6 +1,6 @@
 const API_BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://your-production-url.com/api"
+    ? "https://concesunimaid.vercel.app/api"
     : "http://localhost:3000/api";
 
 export interface ApiResponse<T> {
